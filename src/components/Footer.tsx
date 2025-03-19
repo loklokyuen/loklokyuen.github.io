@@ -1,4 +1,3 @@
-import SocialLinks from "./SocialLinks";
 import { NavLink } from 'react-router';
 
 const Footer = () => {
