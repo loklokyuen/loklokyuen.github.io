@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import '../styles/Header.css';
-import { NavLink } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 interface HeaderProps {
   darkMode: boolean;

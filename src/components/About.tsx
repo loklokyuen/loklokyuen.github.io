@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import profileImage from "../assets/profile.jpeg"
 import CVButton from "./CVButton";
-import { NavLink } from "react-router";
+import { NavLink } from "react-router-dom";
 const About = () => {
   const [loaded, setLoaded] = useState(false);
   const aboutRef = useRef<HTMLElement>(null);
