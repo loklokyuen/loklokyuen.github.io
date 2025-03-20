@@ -204,9 +204,43 @@ a:hover {
 .slide-up {
   transform: translateY(30px);
 }
+
+.slide-right {
+  transform: translateX(-30px);
+}
+
 .loaded {
   opacity: 1 !important;
   transform: translate(0, 0) !important;
+}
+
+/* h1 {
+  font-size: 3rem;
+} */
+
+h2 {
+  font-size: 1.5rem;
+}
+.typewriter h2 {
+  font-size: 1.5rem;
+  overflow: hidden; 
+  display: inline-block;
+  border-right: .15em solid var(--color-secondary-400); 
+  white-space: nowrap; 
+  margin: 0 auto; 
+  animation: 
+    typing 1.5s steps(40, end) forwards,
+    blink-caret .75s step-end infinite alternate;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--color-secondary-600); }
 }
 
 .nav-arrow {
@@ -225,4 +259,18 @@ a:hover {
   justify-content: center;
 }
 
+.dark-mode .card {
+  background-color: var(--color-primary-800);
+  color: var(--color-primary-50);
+}
 
+.project-modal {
+  z-index: 1000;
+  background-color: var(--color-primary-100);
+
+}
+
+.dark-mode .project-modal {
+  background-color: var(--color-primary-800);
+  color: var(--color-primary-50);
+}
