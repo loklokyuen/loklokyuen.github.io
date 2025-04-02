@@ -1,152 +1,217 @@
 @import "tailwindcss";
 @theme {
-  --color-primary-50: #f2f9fd;
-  --color-primary-100: #e4f0fa;
-  --color-primary-200: #cde6f5;
-  --color-primary-300: #90c9e9;
-  --color-primary-400: #54aedc;
-  --color-primary-500: #2e94c9;
-  --color-primary-600: #1f77aa;
-  --color-primary-700: #1a5e8a;
-  --color-primary-800: #195073;
-  --color-primary-900: #1a4460;
-  --color-primary-950: #122c3f;
-  --color-secondary-50: #fff1f3;
-  --color-secondary-100: #fee5e9;
-  --color-secondary-200: #fdced7;
-  --color-secondary-300: #faa7b7;
-  --color-secondary-400: #f77591;
-  --color-secondary-500: #ef476f;
-  --color-secondary-600: #db2357;
-  --color-secondary-700: #b9174a;
-  --color-secondary-800: #9b1644;
-  --color-secondary-900: #85163f;
-  --color-secondary-950: #4a071e;
-  --background-dark: #122c3f;
-  --text-dark: #f2f9fd;
-  --background-light: #ffffff;
-  --text-light: #1a5e8a;
+	--color-primary-50: #f2f9fd;
+	--color-primary-100: #e4f0fa;
+	--color-primary-200: #cde6f5;
+	--color-primary-300: #90c9e9;
+	--color-primary-400: #54aedc;
+	--color-primary-500: #2e94c9;
+	--color-primary-600: #1f77aa;
+	--color-primary-700: #1a5e8a;
+	--color-primary-800: #195073;
+	--color-primary-900: #1a4460;
+	--color-primary-950: #122c3f;
+	--color-secondary-50: #fff1f3;
+	--color-secondary-100: #fee5e9;
+	--color-secondary-200: #fdced7;
+	--color-secondary-300: #faa7b7;
+	--color-secondary-400: #f77591;
+	--color-secondary-500: #ef476f;
+	--color-secondary-600: #db2357;
+	--color-secondary-700: #b9174a;
+	--color-secondary-800: #9b1644;
+	--color-secondary-900: #85163f;
+	--color-secondary-950: #4a071e;
+	--background-dark: #122c3f;
+	--text-dark: #f2f9fd;
+	--background-light: #ffffff;
+	--text-light: #1a5e8a;
 }
 .header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 70px;
-  background-color: var(--background-light);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-  padding: 0;
-  transition: all 0.3s ease;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 70px;
+	background-color: var(--background-light);
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+	padding: 0;
+	transition: all 0.3s ease;
 }
 
 .header.dark {
-  background-color: var(--color-primary-900);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+	background-color: var(--color-primary-900);
+	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
 .header .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 .header-logo {
-  margin: 20px;
+	margin: 20px;
 }
 
 .logo h1 {
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 0;
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin-bottom: 0;
 }
 
 .logo p {
-  font-size: 0.8rem;
-  opacity: 0.7;
+	font-size: 0.8rem;
+	opacity: 0.7;
 }
 
 .nav ul {
-  display: flex;
-  list-style: none;
+	display: flex;
+	list-style: none;
+	gap: 1.5rem;
+	padding: 0;
+	margin: 0;
 }
 
 .nav ul li {
-  margin-left: 25px;
+	margin: 0;
+	position: relative;
 }
 
 .nav ul li a {
-  text-decoration: none;
-  color: inherit;
-  font-weight: 500;
-  position: relative;
-  transition: color 0.3s ease;
+	text-decoration: none;
+	color: inherit;
+	font-weight: 500;
+	position: relative;
+	padding: 0.5rem 0;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	transition: all 0.3s ease;
 }
 
 .nav ul li a::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background-color: var(--primary-color);
-  transition: width 0.3s ease;
+	content: "";
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 0;
+	height: 2px;
+	background-color: var(--color-secondary-500);
+	transition: width 0.3s ease;
+	border-radius: 1px;
 }
 
-.nav ul li a:hover::after {
-  width: 100%;
-  background-color: var(--color-secondary-500);
+.nav ul li a:hover::after,
+.nav ul li a.active-link::after {
+	width: 100%;
+}
+
+.nav ul li a:hover,
+.nav ul li a.active-link {
+	color: var(--color-secondary-500);
+}
+
+.menu-icon {
+	font-size: 0.875rem;
+	opacity: 0.8;
 }
 
 .header-buttons {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
-.theme-toggle, .menu-toggle {
-  background: none;
-  border: none;
-  font-size: 1.25rem;
-  cursor: pointer;
-  margin-left: 15px;
-  color: inherit;
+.theme-toggle,
+.menu-toggle {
+	background: none;
+	border: none;
+	font-size: 1.25rem;
+	cursor: pointer;
+	margin-left: 15px;
+	color: inherit;
 }
 
 .menu-toggle {
-  display: none;
+	display: none;
 }
 
 @media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
-  
-  .nav {
-    position: fixed;
-    top: 75px;
-    left: 0;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
-    transform: translateY(-150%);
-    transition: transform 0.4s ease;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .header.dark .nav {
-    background-color: var(--color-primary-900);
-  }
-  
-  .nav.open {
-    transform: translateY(0);
-  }
-  
-  .nav ul {
-    flex-direction: column;
-    padding: 5px;
-  }
-  
-  .nav ul li {
-    margin: 15px 0;
-    margin-left: 0;
-  }
+	.menu-toggle {
+		display: block;
+	}
+
+	.nav {
+		position: fixed;
+		top: 70px;
+		right: 0;
+		width: 50%;
+		max-width: 300px;
+		height: auto;
+		background-color: var(--background-light);
+		transform: translateX(100%);
+		transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+		box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.1);
+		border-radius: 16px 0 0 16px;
+		overflow: hidden;
+		padding: 1.5rem 0.5rem;
+		z-index: 100;
+	}
+
+	.header.dark .nav {
+		background-color: var(--color-primary-800);
+		box-shadow: -5px 5px 15px rgba(0, 0, 0, 0.35);
+	}
+
+	.nav.open {
+		transform: translateX(0);
+	}
+
+	.menu-list {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+	}
+
+	.nav ul {
+		flex-direction: column;
+		width: 100%;
+		gap: 0;
+	}
+
+	.nav ul li {
+		width: 100%;
+		border-radius: 12px;
+		margin: 0.25rem 0;
+		transition: all 0.2s ease;
+	}
+
+	.nav ul li:hover,
+	.nav ul li.active {
+		background-color: rgba(0, 0, 0, 0.04);
+	}
+
+	.header.dark .nav ul li:hover,
+	.header.dark .nav ul li.active {
+		background-color: rgba(255, 255, 255, 0.08);
+	}
+
+	.nav ul li a {
+		padding: 0.8rem 1.25rem;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
+	}
+
+	.nav ul li a::after {
+		display: none;
+	}
+
+	.menu-icon {
+		margin-right: 0.75rem;
+		width: 20px;
+		display: inline-flex;
+		justify-content: center;
+	}
 }
