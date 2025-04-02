@@ -1,37 +1,19 @@
-import { useEffect, useRef, useState } from "react";
-import profileImage from "../assets/profile.jpeg";
+import { useEffect, useState } from "react";
+import profileImage from "../../../assets/profile.jpeg";
 import CVButton from "./CVButton";
 import { NavLink } from "react-router-dom";
+import useIntersectionObserver from "../../../hooks/useIntersectionObserver";
+
 const About = () => {
+	const { ref: aboutRef, isVisible } = useIntersectionObserver<HTMLElement>();
 	const [loaded, setLoaded] = useState(false);
-	const aboutRef = useRef<HTMLElement>(null);
+
 	useEffect(() => {
-		if (aboutRef.current)
-			aboutRef.current.scrollIntoView({ behavior: "smooth" });
-	}, []);
-	useEffect(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						setLoaded(true);
-						observer.unobserve(entry.target);
-					} else {
-						setLoaded(false);
-					}
-				});
-			},
-			{ threshold: 0.1 }
-		);
-		if (aboutRef.current) {
-			observer.observe(aboutRef.current);
+		if (isVisible) {
+			setLoaded(true);
 		}
-		return () => {
-			if (aboutRef.current) {
-				observer.unobserve(aboutRef.current);
-			}
-		};
-	}, []);
+	}, [isVisible]);
+
 	return (
 		<section
 			className={`about animate-on-load slide-up ${
@@ -42,11 +24,11 @@ const About = () => {
 			<div className="container">
 				<h2 className="section-title">About Me</h2>
 				<div className="about-content m-2">
-					<div className="about-image place-items-center mt-10 mx-auto">
+					<div className="about-image-container place-items-center mt-10 mx-auto">
 						<img
 							src={profileImage}
 							alt="Melody Yuen"
-							className="shadow-sm shadow-secondary-600 rounded-4xl w-48 m-2 mx-auto"
+							className="about-profile-image shadow-sm shadow-secondary-600 rounded-4xl w-48 mt-10 mx-auto"
 						/>
 					</div>
 					<div className="about-text">
@@ -65,10 +47,10 @@ const About = () => {
 							I'm currently looking for new opportunities and would love to hear
 							from you. Please feel free to get in touch or leave a message.
 						</p>
-						<CVButton />
 						<NavLink to="/contact" className="btn secondary">
 							Contact Me
 						</NavLink>
+						<CVButton />
 					</div>
 				</div>
 			</div>

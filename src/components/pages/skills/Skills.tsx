@@ -1,10 +1,11 @@
-import { useEffect, useRef, useState } from "react";
-import Skill from "./Skill";
+import { useEffect, useState } from "react";
+import Skill from "../../common/Skill";
+import useIntersectionObserver from "../../../hooks/useIntersectionObserver";
 
 const Skills = () => {
 	const [loaded, setLoaded] = useState(false);
 	const [skillsVisible, setSkillsVisible] = useState<number[]>([]);
-	const skillsRef = useRef<HTMLElement>(null);
+	const { ref: skillsRef, isVisible } = useIntersectionObserver<HTMLElement>();
 
 	const frontendCoreSkills: SkillName[] = [
 		"JavaScript",
@@ -18,6 +19,8 @@ const Skills = () => {
 		"React Router",
 		"Tailwind CSS",
 		"Material-UI",
+		"Vite",
+		"Expo",
 	];
 	const backendSkills: SkillName[] = ["Node.js", "Express.js"];
 	const databaseSkills: SkillName[] = [
@@ -27,7 +30,13 @@ const Skills = () => {
 		"Firestore",
 	];
 	const testingSkills: SkillName[] = ["Jest"];
-	const deploymentSkills: SkillName[] = ["Git", "GitHub Actions", "Netlify"];
+	const deploymentSkills: SkillName[] = [
+		"GitHub",
+		"Git",
+		"GitHub Actions",
+		"GitHub Pages",
+		"Netlify",
+	];
 
 	const allSkills = [
 		...frontendCoreSkills,
@@ -44,35 +53,17 @@ const Skills = () => {
 	}, []);
 
 	useEffect(() => {
-		const observer = new IntersectionObserver(
-			(entries) => {
-				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
-						setLoaded(true);
-						observer.unobserve(entry.target);
-						const skillCount = allSkills.length;
-						for (let i = 0; i < skillCount; i++) {
-							setTimeout(() => {
-								setSkillsVisible((prev) => [...prev, i]);
-							}, i * 100);
-						}
-					} else {
-						setLoaded(false);
-						setSkillsVisible([]);
-					}
-				});
-			},
-			{ threshold: 0.1 }
-		);
-		if (skillsRef.current) {
-			observer.observe(skillsRef.current);
-		}
-		return () => {
-			if (skillsRef.current) {
-				observer.unobserve(skillsRef.current);
+		if (isVisible) {
+			setLoaded(true);
+			const skillCount = allSkills.length;
+			for (let i = 0; i < skillCount; i++) {
+				setTimeout(() => {
+					setSkillsVisible((prev) => [...prev, i]);
+				}, i * 100);
 			}
-		};
-	}, [allSkills.length]);
+		}
+	}, [isVisible, allSkills.length]);
+
 	const renderSkillCategory = (
 		skills: SkillName[],
 		categoryTitle: string,
@@ -98,10 +89,8 @@ const Skills = () => {
 									}}>
 									<Skill skillName={skill} />
 								</div>
-								<div className=" sm:hidden flex flex-col items-center ">
-									<span className="text-xs  ps-0.5 rounded-sm m-1">
-										{skill}
-									</span>
+								<div className="flex flex-col items-center ">
+									<span className="text-xs ps-0.5 rounded-sm m-1">{skill}</span>
 								</div>
 							</div>
 						);
