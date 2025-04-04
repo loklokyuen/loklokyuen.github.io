@@ -23,7 +23,7 @@ import NCNewsNewArticleMobile from "../assets/projects/nc-news/new-article-mobil
 
 import PortfolioCover from "../assets/projects/portfolio/cover.png";
 import PortfolioDarkMode from "../assets/projects/portfolio/dark-mode.png";
-import PortfolioLightMode from "../assets/projects/portfolio/light-mode.png";
+import PortfolioLightMode from "../assets/projects/portfolio/light-mode.jpg";
 import PortfolioProject from "../assets/projects/portfolio/project.png";
 import PortfolioSkillsMobile from "../assets/projects/portfolio/skills-mobile.png";
 import PortfolioHomeMobile from "../assets/projects/portfolio/home-mobile.png";
@@ -286,7 +286,7 @@ export const projects: Project[] = [
 		type: "fullstack",
 		details: {
 			intro:
-				"A modern, responsive portfolio website built with **React**, **TypeScript**, and **Vite** to showcase my projects and skills as a developer.",
+				"A responsive portfolio website built with **React**, **TypeScript**, and **Vite** to showcase my projects and skills as a developer.",
 			noteText: "You're currently browsing this project!",
 			sections: [
 				{

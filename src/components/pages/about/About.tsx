@@ -40,13 +40,10 @@ const About = () => {
 						</p>
 						<p>
 							I enjoy solving complex problems and creating intuitive, dynamic
-							user experiences. I'm constantly learning new technologies and
-							techniques to become a better developer.
+							user experiences. My focus is on writing clean, maintainable code
+							while continuously learning new technologies and best practices.
 						</p>
-						<p>
-							I'm currently looking for new opportunities and would love to hear
-							from you. Please feel free to get in touch or leave a message.
-						</p>
+						<p>I'm actively seeking new opportunities — let’s connect!</p>
 						<NavLink to="/contact" className="btn secondary">
 							Contact Me
 						</NavLink>
