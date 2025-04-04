@@ -28,9 +28,9 @@ const BackToTop: React.FC<BackToTopProps> = ({ threshold = 300 }) => {
 	};
 
 	return (
-		<button
-			className={`back-to-top fixed bottom-5 right-5 bg-primary-500 hover:bg-primary-600 
-        text-white p-3 rounded-full shadow-lg transition-all duration-300 z-50
+		<div
+			className={`back-to-top fixed bottom-5 right-5 px-6 py-4 rounded-full shadow-lg transition-all duration-300 z-50
+				bg-primary-200  cursor-pointer hover:bg-primary-400
         ${
 					isVisible
 						? "opacity-90 translate-y-0"
@@ -39,7 +39,7 @@ const BackToTop: React.FC<BackToTopProps> = ({ threshold = 300 }) => {
 			onClick={scrollToTop}
 			aria-label="Back to top">
 			<i className="fa-solid fa-arrow-up"></i>
-		</button>
+		</div>
 	);
 };
 
