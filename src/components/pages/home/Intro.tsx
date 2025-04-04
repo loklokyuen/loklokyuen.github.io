@@ -22,13 +22,13 @@ const Intro = () => {
 			<div className="container">
 				<div
 					className="intro-content"
-					style={{ paddingTop: "10rem", paddingBottom: "5rem" }}>
+					style={{ paddingTop: "12rem", paddingBottom: "5rem" }}>
 					<div
 						className={`animate-on-load slide-right text-wrap ${
 							loaded ? "loaded" : ""
 						}`}>
 						<h1>
-							Hello, I'm <span className="highlight">Melody Yuen</span>
+							Hello, I'm <span className="highlight text-6xl">Melody Yuen</span>
 						</h1>
 						<div
 							className="w-full max-w-sm mx-auto mb-2"
@@ -38,7 +38,7 @@ const Intro = () => {
 							}}>
 							{loaded && (
 								<Typewriter
-									text="Full Stack Software Developer"
+									text="Junior Software Developer"
 									delay={80}
 									className="text-sm"
 								/>
@@ -46,11 +46,8 @@ const Intro = () => {
 						</div>
 						<div className="text-wrap max-w-xl mx-auto">
 							<p>
-								I'm a junior software developer with full-stack experience,
-								specializing in JavaScript, React, and Node.js. I enjoy building
-								intuitive web applications and am currently expanding my skills
-								through personal projects and open-source contributions. Explore
-								my work below or reach out!
+								Experienced in JavaScript, TypeScript, React, React Native, and
+								Node.js.
 							</p>
 						</div>
 					</div>

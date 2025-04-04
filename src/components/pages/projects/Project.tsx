@@ -490,13 +490,13 @@ const Project = () => {
 					)}
 				</div>
 
-				<div className="project-links flex flex-col sm:flex-row justify-center gap-2 align-middle text-nowrap mt-4">
+				<div className="project-links flex flex-row justify-center align-middle text-nowrap mt-4 mx-2">
 					<a
 						href={projectDetails.github}
 						className="btn small w-full sm:w-auto"
 						target="_blank"
 						rel="noopener noreferrer">
-						<i className="fa-brands fa-github mr-1"></i> GitHub
+						<i className="fa-brands fa-github"></i> GitHub
 					</a>
 					{projectDetails.demo && projectId !== "portfolio" ? (
 						<a
@@ -504,7 +504,7 @@ const Project = () => {
 							className="btn small secondary w-full sm:w-auto"
 							target="_blank"
 							rel="noopener noreferrer">
-							<i className="fa-solid fa-globe mr-1"></i> Live Demo
+							<i className="fa-solid fa-globe"></i> Live Demo
 						</a>
 					) : null}
 				</div>
