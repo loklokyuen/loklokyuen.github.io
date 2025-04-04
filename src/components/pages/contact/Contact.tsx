@@ -62,7 +62,7 @@ const Contact = () => {
 				<div className="contact-content flex flex-col w-full max-w-2xl mt-10 mx-auto bg-white rounded-2xl p-2 shadow-lg transition-all duration-300">
 					<p className="text-center max-w-lg mx-auto mb-4">
 						I'm currently looking for new opportunities and would love to hear
-						from you. I'm looking forward to hearing from you!
+						from you!
 					</p>
 					<Tooltip
 						title="I'll be sure to check my mailbox!"
@@ -79,15 +79,20 @@ const Contact = () => {
 					<div className="contact-info grid grid-flow-row grid-cols-1 my-6">
 						<div className="contact-item flex flex-row items-center justify-center gap-1 hover:bg-primary-100 rounded-lg transition-colors duration-200">
 							<i className="fa-solid fa-envelope text-secondary-500 text-xl"></i>
-							melody.yuen@icloud.com
+							<a href="mailto:melody.yuen@icloud.com">melody.yuen@icloud.com</a>
 						</div>
 						<div className="contact-item flex flex-row items-center justify-center gap-1 hover:bg-primary-100 rounded-lg transition-colors duration-200">
 							<i className="fa-solid fa-phone text-secondary-500 text-xl"></i>
-							+44 07774 195 561
+							<a href="tel:+447774195561">+44 07774 195 561</a>
 						</div>
 						<div className="contact-item flex flex-row items-center justify-center gap-1 hover:bg-primary-100 rounded-lg transition-colors duration-200">
 							<i className="fa-solid fa-map-marker-alt text-secondary-500 text-xl"></i>
-							Surrey, UK
+							<a
+								href="https://www.google.com/maps/place/Staines-upon-Thames/"
+								target="_blank"
+								rel="noopener noreferrer">
+								Staines-upon-Thames, UK
+							</a>
 						</div>
 						<div className="mt-2">
 							<SocialLinks />
@@ -128,7 +133,7 @@ const Contact = () => {
 								<div className="form-group md:grid md:grid-cols-4 md:gap-4 items-center m-2">
 									<label
 										htmlFor="name"
-										className="block text-end mb-2 md:mb-0 font-medium">
+										className="block text-center mb-2 md:mb-0 font-medium md:text-end">
 										Name
 									</label>
 									<input
@@ -145,7 +150,7 @@ const Contact = () => {
 								<div className="form-group md:grid md:grid-cols-4 md:gap-4 items-center m-2">
 									<label
 										htmlFor="email"
-										className="block text-end mb-2 md:mb-0 font-medium">
+										className="block text-center mb-2 md:mb-0 font-medium md:text-end">
 										Email
 									</label>
 									<input
@@ -159,10 +164,10 @@ const Contact = () => {
 									/>
 								</div>
 
-								<div className="form-group md:grid md:grid-cols-4 md:gap-4 items-start m-2">
+								<div className="form-group md:grid md:grid-cols-4 md:gap-4 items-center m-2">
 									<label
 										htmlFor="message"
-										className="block text-end mb-2 md:mb-0 font-medium">
+										className="block text-center mb-2 md:mb-0 font-medium md:text-end">
 										Message
 									</label>
 									<textarea
