@@ -2,7 +2,8 @@ import { Box, Chip, Modal } from "@mui/material";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import { useEffect, useRef, useState } from "react";
-import Skill from "./Skill";
+import Skill from "../../common/Skill";
+import { formatMarkdownText } from "../../../utils/formatText";
 
 interface ProjectProps {
 	project: Project;
@@ -16,6 +17,7 @@ const ProjectModal = ({ project, open, onClose, isDarkMode }: ProjectProps) => {
 	const [projectDetails, setProjectDetails] = useState<ProjectDetails>();
 	const [skillsVisible, setSkillsVisible] = useState<number[]>([]);
 	const projectRef = useRef<HTMLElement>(null);
+
 	useEffect(() => {
 		if (!open) return;
 		if (project.type === "separated") {
@@ -67,6 +69,11 @@ const ProjectModal = ({ project, open, onClose, isDarkMode }: ProjectProps) => {
 			setProjectDetails(project.frontend.details);
 		}
 	};
+
+	if (!projectDetails) {
+		return null; // Add safety check
+	}
+
 	return (
 		<Modal
 			open={open}
@@ -112,58 +119,59 @@ const ProjectModal = ({ project, open, onClose, isDarkMode }: ProjectProps) => {
 						</ButtonGroup>
 					</div>
 				)}
-				{projectDetails && projectDetails.image && (
+				{projectDetails && projectDetails.coverImage && (
 					<div className="project-image place-items-center">
 						<img
-							src={projectDetails.image}
+							src={projectDetails.coverImage}
 							alt={project.title}
 							className="object-contain max-h-full max-w-full mx-auto px-4 py-2"
 						/>
 					</div>
 				)}
 				<div className="project-info">
-					<p className="text-center m-4">{projectDetails?.description}</p>
+					<p className="text-center m-4">
+						{formatMarkdownText(projectDetails.intro)}
+					</p>
 					<div className="technologies flex flex-row flex-wrap items-center justify-center m-2">
-						{projectDetails &&
-							projectDetails.technologies.map((tech, index) => (
-								<div className="flex flex-col items-center" key={index}>
-									<div
-										className={`skill-item place-items-center rounded-xl bg-primary-100 animate-on-load slide-up hidden sm:block`}
-										key={index}
-										style={{
-											borderRadius: "50%",
-											margin: "10px",
-											padding: "10px",
-											opacity: skillsVisible.includes(index) ? 1 : 0,
-											transform: skillsVisible.includes(index)
-												? "translateY(0)"
-												: "translateY(20px)",
-											transition: "opacity 0.4s ease, transform 0.4s ease",
-										}}>
-										<Skill skillName={tech} size="small" />
-									</div>
-									<div className="sm:hidden items-center m-0.5">
-										<Chip
-											label={tech}
-											sx={{
-												backgroundColor: "#1f77aa",
-												color: "#ffffff",
-												margin: "2px",
-											}}></Chip>
-									</div>
+						{projectDetails.technologies.map((tech, index) => (
+							<div className="flex flex-col items-center" key={index}>
+								<div
+									className={`skill-item place-items-center rounded-xl bg-primary-100 animate-on-load slide-up hidden sm:block`}
+									style={{
+										borderRadius: "50%",
+										margin: "10px",
+										padding: "10px",
+										opacity: skillsVisible.includes(index) ? 1 : 0,
+										transform: skillsVisible.includes(index)
+											? "translateY(0)"
+											: "translateY(20px)",
+										transition: "opacity 0.4s ease, transform 0.4s ease",
+									}}>
+									<Skill skillName={tech} size="small" />
 								</div>
-							))}
+								<div className="sm:hidden items-center m-0.5">
+									<Chip
+										label={tech}
+										sx={{
+											backgroundColor: "#1f77aa",
+											color: "#ffffff",
+											margin: "2px",
+										}}
+									/>
+								</div>
+							</div>
+						))}
 					</div>
 					<div className="project-links flex flex-row justify-center gap-2 mb-4">
 						<a
-							href={projectDetails?.github}
+							href={projectDetails.github}
 							className="btn small"
 							target="_blank"
 							rel="noopener noreferrer">
 							GitHub
 						</a>
 						<a
-							href={projectDetails?.demo || undefined}
+							href={projectDetails.demo || undefined}
 							className="btn small secondary"
 							target="_blank"
 							rel="noopener noreferrer">
