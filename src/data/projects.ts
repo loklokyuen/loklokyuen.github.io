@@ -179,7 +179,7 @@ export const projects: Project[] = [
 					"Netlify",
 				],
 				github: "https://github.com/loklokyuen/nc-news",
-				demo: "https://news-and-discussion.netlify.app",
+				demo: "https://nextcore-news.netlify.app",
 				coverImage: NCNewsCover,
 				images: [
 					{
