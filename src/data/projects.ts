@@ -1,3 +1,4 @@
+import WorkXPCover from "../assets/projects/work-xp/cover.svg";
 import WorkXPApplications from "../assets/projects/work-xp/applications.jpg";
 import WorkXPBusinessProfile from "../assets/projects/work-xp/business-profile.jpg";
 import WorkXPConfirmingModal from "../assets/projects/work-xp/confirming-modal.jpg";
@@ -9,7 +10,8 @@ import WorkXPRegisterOrLogin from "../assets/projects/work-xp/register-or-login.
 import WorkXPWelcome from "../assets/projects/work-xp/welcome.jpg";
 import NewsBackendImage from "../assets/news-backend.png";
 
-import NCNewsCover from "../assets/projects/nc-news/cover.jpeg";
+import NCNewsCoverSVG from "../assets/projects/nc-news/cover.svg";
+import NCNewsCoverPhoto from "../assets/projects/nc-news/cover.jpeg";
 import NCNewsArticle from "../assets/projects/nc-news/article.jpg";
 import NCNewsArticlesPagination from "../assets/projects/nc-news/articles-pagination.jpg";
 import NCNewsArticles from "../assets/projects/nc-news/articles.jpg";
@@ -21,18 +23,231 @@ import NCNewsHomeMobile from "../assets/projects/nc-news/home-mobile.png";
 import NCNewsNewArticleDesktop from "../assets/projects/nc-news/new-article-desktop.png";
 import NCNewsNewArticleMobile from "../assets/projects/nc-news/new-article-mobile.png";
 
-import PortfolioCover from "../assets/projects/portfolio/cover.png";
+import PortfolioCoverSVG from "../assets/projects/portfolio/cover.svg";
+import PortfolioCoverPhoto from "../assets/projects/portfolio/cover.png";
 import PortfolioDarkMode from "../assets/projects/portfolio/dark-mode.png";
 import PortfolioLightMode from "../assets/projects/portfolio/light-mode.jpg";
 import PortfolioProject from "../assets/projects/portfolio/project.png";
 import PortfolioSkillsMobile from "../assets/projects/portfolio/skills-mobile.png";
 import PortfolioHomeMobile from "../assets/projects/portfolio/home-mobile.png";
 
+import SkincareAdvisorCover from "../assets/projects/skincare-advisor/cover.svg";
+import SkincareAdvisorHome from "../assets/projects/skincare-advisor/SkinIQ - Home.png";
+import SkincareAdvisorVideo from "../assets/projects/skincare-advisor/SkinIQ - demo.mp4";
+import SchoolOfDandoriCover from "../assets/projects/school-of-dandori/cover.svg";
+import ValueStreamCover from "../assets/projects/value-stream/cover.svg";
+import ValueStreamHome from "../assets/projects/value-stream/Value Stream - Home.png";
+import ValueStreamSuggestion from "../assets/projects/value-stream/Value Stream - Suggestion.png";
+import ValueStreamTrending from "../assets/projects/value-stream/Value Stream - Trending.png";
+import MovieverCover from "../assets/projects/moviever/cover.svg";
+
 export const projects: Project[] = [
+	{
+		title: "SkinIQ — Skincare Intelligence Platform",
+		projectId: "skincare-advisor",
+		type: "fullstack",
+		category: "AI / Data",
+		details: {
+			intro:
+				"SkinIQ is a personalised skincare advisor that combines **LangGraph**, **OpenAI**, and **Streamlit**. It keeps a user's skin profile and routine, retrieves relevant products and ingredient evidence from a vector database, and answers questions in four modes depending on intent: analyse, recommend, build, or teach.",
+			sections: [
+				{
+					title: "Key Features:",
+					bullets: [
+						"Skin profile setup (type, concerns, goals, sensitivities) with persistent storage",
+						'AM/PM routine builder with saved "Interested" product list',
+						"Intent classification across four modes: analyse, recommend, build, teach",
+						"Product retrieval grounded in a scraped Boots catalogue with **pgvector** similarity search",
+						"Ingredient-level reasoning with evidence pulled from **PubMed** and community sources",
+					],
+				},
+				{
+					title: "Technical Implementation:",
+					bullets: [
+						"Built the conversational flow with **LangGraph**, including intent classification, retrieval, parallel analysis, and validation nodes",
+						"Used **OpenAI** `gpt-4o-mini` for chat and `text-embedding-ada-002` for embeddings",
+						"Stored profiles, products, ingredients, and conversation checkpoints in **PostgreSQL** with **pgvector**",
+						"Wrote a **ScraperAPI**-backed Boots catalogue scraper and an embedding backfill pipeline",
+						"Built the user interface in **Streamlit** with a multi-page layout (Home, Profile, Routine, Chat, Interested)",
+					],
+				},
+				{
+					title: "Engineering Approach:",
+					bullets: [
+						"Modular **graph-based** workflow that separates retrieval, analysis, and response writing",
+						"Service layer split by domain (product, ingredient, profile, evidence, RAG)",
+						"Graceful fallback to in-memory checkpointing when Postgres is unreachable",
+						"**pytest** suite covering product card extraction, profile migration, candidate ranking, and evidence summaries",
+					],
+				},
+			],
+			technologies: [
+				"Python",
+				"LangChain",
+				"LangGraph",
+				"OpenAI API",
+				"RAG",
+				"pgvector",
+				"PostgreSQL",
+				"Streamlit",
+				"pytest",
+			],
+			github: "https://github.com/loklokyuen/skincare_advisor",
+			demo: null,
+			coverImage: SkincareAdvisorCover,
+			previewImage: SkincareAdvisorHome,
+			demoVideo: SkincareAdvisorVideo,
+			images: [
+				{
+					url: SkincareAdvisorHome,
+					description: "SkinIQ home — skin profile and routine overview",
+				},
+			],
+		},
+	},
+	{
+		title: "School of Dandori",
+		projectId: "school-of-dandori",
+		type: "fullstack",
+		category: "AI / Data",
+		team: { size: 3, role: "Backend + admin panel + RAG" },
+		details: {
+			intro:
+				"A UK leisure class provider was promoting 200+ courses through static PDFs, with customers calling staff to find courses before paying manually online. In a 3-person team, Melody set up **Firestore** to store all migrated course data, built the admin panel for real-time course management, and contributed to the **RAG** pipeline and AI chatbot that gives customers personalised course recommendations, freeing staff for higher-value work and making course discovery effortless.",
+			sections: [
+				{
+					title: "Key Features:",
+					bullets: [
+						"PDF course data extraction into structured Firestore records",
+						"Admin panel for creating, editing, and validating course records",
+						"RAG pipeline for grounded course recommendations",
+						"Natural-language chatbot for course discovery",
+					],
+				},
+				{
+					title: "My Contributions:",
+					bullets: [
+						"Set up **Firestore** schema and migrated 200+ PDF course listings into structured records",
+						"Built the **admin panel** for course creation, editing, and validation",
+						"Contributed to the **RAG pipeline** for grounded course recommendations",
+						"Helped build the chatbot for natural-language course discovery",
+					],
+				},
+			],
+			technologies: [
+				"Python",
+				"Firestore",
+				"Streamlit",
+				"RAG",
+				"OpenAI API",
+				"LangChain",
+			],
+			github: "https://github.com/loklokyuen/school-of-dandori",
+			demo: "https://school-of-dandori.streamlit.app",
+			coverImage: SchoolOfDandoriCover,
+		},
+	},
+	{
+		title: "Value Stream",
+		projectId: "value-stream",
+		type: "fullstack",
+		category: "AI / Data",
+		team: { size: 4, role: "GCP pipeline + Cloud SQL + LLM integration" },
+		details: {
+			intro:
+				"Value Stream is an e-commerce intelligence tool for beauty skincare retailer Minimal Collection. In a team of 4, Melody built a **GCP** pipeline using **Cloud Scheduler**, **Cloud Run**, and **ScraperAPI** to scrape Amazon's top 30 daily beauty bestsellers, storing 4-day ranking trends in **Cloud SQL**. Shopify inventory is cross-referenced by an LLM against bestseller data to recommend discounts or hero banner placements. A second page surfaces trending unstocked products with Amazon links.",
+			sections: [
+				{
+					title: "Key Features:",
+					bullets: [
+						"Automated daily Amazon bestseller collection with 4-day ranking trend tracking",
+						"Shopify inventory integration for stock-aware recommendations",
+						"LLM-generated commercial actions (discounts, hero banner placements)",
+						"Trending unstocked product discovery with direct Amazon links",
+					],
+				},
+				{
+					title: "My Contributions:",
+					bullets: [
+						"Built the **GCP** data pipeline with **Cloud Scheduler**, **Cloud Run**, **ScraperAPI**, and **Cloud SQL**",
+						"Processed Amazon bestseller data to track ranking changes and trend signals",
+						"Integrated Shopify stock data into the recommendation workflow",
+						"Contributed to the **LLM** recommendation layer",
+						"Deployed the **Streamlit** dashboard on GCP",
+					],
+				},
+			],
+			technologies: [
+				"Python",
+				"Streamlit",
+				"Cloud Run",
+				"Cloud SQL",
+				"Cloud Scheduler",
+				"OpenAI API",
+				"pandas",
+			],
+			github: "https://github.com/loklokyuen/value-stream",
+			demo: "https://value-stream-1000071166852.europe-west2.run.app",
+			coverImage: ValueStreamCover,
+			previewImage: ValueStreamHome,
+			images: [
+				{
+					url: ValueStreamHome,
+					description:
+						"Value Stream dashboard — bestseller trends and recommendations",
+				},
+				{
+					url: ValueStreamSuggestion,
+					description:
+						"LLM-generated commercial suggestions against Shopify stock",
+				},
+				{
+					url: ValueStreamTrending,
+					description: "Trending unstocked products with Amazon links",
+				},
+			],
+		},
+	},
+	{
+		title: "Moviever — A Blast from the Past",
+		projectId: "moviever",
+		type: "fullstack",
+		category: "AI / Data",
+		team: { size: 3, role: "Data pipeline + TMDB API + shopping bag" },
+		details: {
+			intro:
+				"Moviever is a physical movie rental company seeking to differentiate in a competitive market by championing niche, highly-rated films. Working in a team of 3, Melody helped build A Blast from the Past, a **Streamlit** app that pulls live data from the **TMDB API** to offer highly-rated popular and niche movie suggestions based on genres and themes drawn from films users select themselves. She handled data cleaning, TMDB API calls, and the shopping bag so users can save picks for rental.",
+			sections: [
+				{
+					title: "Key Features:",
+					bullets: [
+						"Niche highly-rated movie discovery from live TMDB data",
+						"Taste profile built from films users select themselves",
+						"Personalised recommendations across genres and themes",
+						"Watchlist and shopping bag for saving rentals",
+					],
+				},
+				{
+					title: "My Contributions:",
+					bullets: [
+						"Built the **TMDB API** integration and data fetch pipeline",
+						"Handled **data cleaning** with **pandas** for the recommendation flow",
+						"Implemented the shopping bag so users can save picks for rental",
+					],
+				},
+			],
+			technologies: ["Python", "Streamlit", "pandas"],
+			github: "https://github.com/loklokyuen/moviever_demo",
+			demo: null,
+			coverImage: MovieverCover,
+		},
+	},
 	{
 		title: "Work-XP Mobile Application",
 		projectId: "work-xp-mobile-app",
 		type: "fullstack",
+		category: "Mobile Application",
+		team: { size: 6, role: "Auth + chat + uploads" },
 		details: {
 			intro:
 				"A **React Native (Expo)** mobile application built collaboratively in a team of 6 developers with **TypeScript** to connect students with short-term work opportunities and businesses with hiring needs.",
@@ -84,7 +299,8 @@ export const projects: Project[] = [
 			],
 			github: "https://github.com/loklokyuen/work-xp",
 			demo: "https://work-xp.netlify.app",
-			coverImage: WorkXPExplore,
+			coverImage: WorkXPCover,
+			previewImage: WorkXPExplore,
 			images: [
 				{
 					url: WorkXPWelcome,
@@ -133,6 +349,7 @@ export const projects: Project[] = [
 		title: "NextCore News - Discussion Web Platform",
 		projectId: "news-discussion-platform",
 		type: "separated",
+		category: "Web Application",
 		frontend: {
 			details: {
 				intro:
@@ -180,7 +397,8 @@ export const projects: Project[] = [
 				],
 				github: "https://github.com/loklokyuen/nc-news",
 				demo: "https://nextcore-news.netlify.app/",
-				coverImage: NCNewsCover,
+				coverImage: NCNewsCoverSVG,
+				previewImage: NCNewsCoverPhoto,
 				images: [
 					{
 						url: NCNewsHomeBrowser,
@@ -284,6 +502,7 @@ export const projects: Project[] = [
 		title: "Personal Portfolio Website",
 		projectId: "portfolio",
 		type: "fullstack",
+		category: "Web Application",
 		details: {
 			intro:
 				"A responsive portfolio website built with **React**, **TypeScript**, and **Vite** to showcase my projects and skills as a developer.",
@@ -294,7 +513,7 @@ export const projects: Project[] = [
 					bullets: [
 						"Developed with **React** and **TypeScript** for type-safe component architecture",
 						"Styled with **Tailwind CSS** for responsive design and easy customization",
-						"Implemented dark/light mode with theme persistence",
+						"Implemented dark/light mode",
 						"Used **React Router** for client-side navigation",
 						"Set up **Formspree** integration for a functional contact form",
 						"Deployed with **GitHub Pages** for continuous delivery",
@@ -306,7 +525,7 @@ export const projects: Project[] = [
 						"Responsive design optimized for all device sizes",
 						"Dynamic project gallery with detailed project pages",
 						"Interactive UI with animations and transitions",
-						"Dark/light mode toggle with system preference detection",
+						"Dark/light mode toggle",
 						"Contact form with validation and success feedback",
 						"Skill visualization with categorized technology icons",
 					],
@@ -333,7 +552,8 @@ export const projects: Project[] = [
 			],
 			github: "https://github.com/loklokyuen/loklokyuen.github.io",
 			demo: "https://loklokyuen.github.io",
-			coverImage: PortfolioCover,
+			coverImage: PortfolioCoverSVG,
+			previewImage: PortfolioCoverPhoto,
 			images: [
 				{
 					url: PortfolioLightMode,

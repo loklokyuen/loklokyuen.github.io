@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="SkinIQ cover">
+  <rect width="800" height="520" fill="#ff7a59"/>
+  <rect x="40" y="40" width="720" height="440" fill="none" stroke="#efe6d8" stroke-width="2" opacity="0.5"/>
+  <text x="400" y="270" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="120" font-weight="700" fill="#efe6d8">SkinIQ</text>
+  <text x="400" y="330" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" fill="#efe6d8" opacity="0.8">Skincare Intelligence Platform</text>
+</svg>

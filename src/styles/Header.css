@@ -1,31 +1,32 @@
 @import "tailwindcss";
 @theme {
-	--color-primary-50: #f2f9fd;
-	--color-primary-100: #e4f0fa;
-	--color-primary-200: #cde6f5;
-	--color-primary-300: #90c9e9;
-	--color-primary-400: #54aedc;
-	--color-primary-500: #2e94c9;
-	--color-primary-600: #1f77aa;
-	--color-primary-700: #1a5e8a;
-	--color-primary-800: #195073;
-	--color-primary-900: #1a4460;
-	--color-primary-950: #122c3f;
-	--color-secondary-50: #fff1f3;
-	--color-secondary-100: #fee5e9;
-	--color-secondary-200: #fdced7;
-	--color-secondary-300: #faa7b7;
-	--color-secondary-400: #f77591;
-	--color-secondary-500: #ef476f;
-	--color-secondary-600: #db2357;
-	--color-secondary-700: #b9174a;
-	--color-secondary-800: #9b1644;
-	--color-secondary-900: #85163f;
-	--color-secondary-950: #4a071e;
-	--background-dark: #122c3f;
-	--text-dark: #f2f9fd;
-	--background-light: #ffffff;
-	--text-light: #1a5e8a;
+	--color-primary-50: #f4f7ed;
+	--color-primary-100: #e8efde;
+	--color-primary-200: #d1dfba;
+	--color-primary-300: #b3cba0;
+	--color-primary-400: #91bfb1;
+	--color-primary-500: #7cb0a1;
+	--color-primary-600: #5d9685;
+	--color-primary-700: #487b6c;
+	--color-primary-800: #366154;
+	--color-primary-900: #284c41;
+	--color-primary-950: #1a302a;
+	--color-secondary-50: #fff5f1;
+	--color-secondary-100: #ffe6dc;
+	--color-secondary-200: #fed1be;
+	--color-secondary-300: #fcba9b;
+	--color-secondary-400: #f7a988;
+	--color-secondary-500: #ff7a59;
+	--color-secondary-600: #e5613d;
+	--color-secondary-700: #c14a2a;
+	--color-secondary-800: #9c3b22;
+	--color-secondary-900: #7c2f1c;
+	--color-secondary-950: #43170d;
+	--color-beige: #efe6d8;
+	--background-dark: #1a302a;
+	--text-dark: #f0ebe2;
+	--background-light: #faf5ee;
+	--text-light: #2d2a26;
 }
 .header {
 	position: fixed;
@@ -33,8 +34,8 @@
 	left: 0;
 	width: 100%;
 	height: 70px;
-	background-color: var(--background-light);
-	box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+	background-color: #fdfaf5;
+	box-shadow: 0 1px 0 rgba(45, 42, 38, 0.08);
 	z-index: 1000;
 	padding: 0;
 	transition: all 0.3s ease;
@@ -52,6 +53,63 @@
 }
 .header-logo {
 	margin: 20px;
+}
+
+.header-logo-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.4rem;
+}
+
+.header-logo-text {
+	font-family: "Fraunces", "Georgia", serif;
+	font-size: 1.5rem;
+	font-weight: 500;
+	letter-spacing: -0.015em;
+	font-variation-settings: "opsz" 24, "SOFT" 0;
+}
+
+.header-logo-leaf {
+	width: 22px;
+	height: 22px;
+	transform: rotate(-10deg);
+	flex-shrink: 0;
+}
+
+.header-cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	padding: 0.5rem 1.1rem;
+	background: var(--color-secondary-500);
+	color: white;
+	border-radius: 999px;
+	font-family: "Inter", sans-serif;
+	font-size: 0.9rem;
+	font-weight: 500;
+	letter-spacing: 0.01em;
+	text-decoration: none;
+	transition: all 0.2s ease;
+	margin-right: 0.75rem;
+}
+
+.header-cta:hover {
+	background: var(--color-secondary-400);
+	color: white;
+	transform: translateY(-1px);
+}
+
+
+@media (max-width: 768px) {
+	.header-cta {
+		display: none;
+	}
+}
+
+.nav ul li a {
+	font-family: "Inter", sans-serif;
+	font-weight: 500;
+	letter-spacing: -0.005em;
 }
 
 .logo h1 {
@@ -148,7 +206,7 @@
 		width: 50%;
 		max-width: 300px;
 		height: auto;
-		background-color: var(--background-light);
+		background-color: #fdfaf5;
 		transform: translateX(100%);
 		transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 		box-shadow: none;

@@ -57,9 +57,25 @@ const ProjectPreview = ({ project }: ProjectPreviewProps) => {
 			</div>
 
 			<CardContent className="flex flex-col items-center justify-center p-3 pb-1">
-				<h3 className="font-semibold text-lg hover:scale-105 hover:transform-3d duration-300">
-					{project.title}
-				</h3>
+				<div className="flex items-center justify-center gap-2 flex-wrap">
+					<h3 className="project-card-title text-xl hover:scale-105 hover:transform-3d duration-300">
+						{project.title}
+					</h3>
+					{project.team ? (
+						<div className="flex flex-col items-center gap-1">
+							<span className="text-[10px] font-medium uppercase tracking-wide px-2 py-0.5 rounded-full bg-secondary-100 text-secondary-700">
+								Team of {project.team.size}
+							</span>
+							<span className="text-xs text-primary-700">
+								{project.team.role}
+							</span>
+						</div>
+					) : (
+						<span className="text-[10px] font-medium uppercase tracking-wide px-2 py-0.5 rounded-full bg-primary-100 text-primary-700">
+							Solo
+						</span>
+					)}
+				</div>
 
 				<div className="flex flex-wrap justify-center gap-2 mt-2">
 					{displayTechnologies.map((tech) => (

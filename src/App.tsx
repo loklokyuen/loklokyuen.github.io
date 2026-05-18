@@ -15,13 +15,7 @@ function App() {
 	const [darkMode, setDarkMode] = useState(false);
 
 	const toggleDarkMode = () => {
-		const newDarkMode = !darkMode;
-		setDarkMode(newDarkMode);
-		if (newDarkMode) {
-			document.getElementById("root")?.classList.add("dark-mode");
-		} else {
-			document.getElementById("root")?.classList.remove("dark-mode");
-		}
+		setDarkMode((current) => !current);
 	};
 
 	useEffect(() => {
@@ -30,7 +24,7 @@ function App() {
 		} else {
 			document.getElementById("root")?.classList.remove("dark-mode");
 		}
-	}, []);
+	}, [darkMode]);
 
 	return (
 		<div className={`app ${darkMode ? "dark-mode" : ""}`}>

@@ -1,11 +1,11 @@
 import { useEffect, useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useSwipeable } from "react-swipeable";
-import Skill from "../../common/Skill";
-import { Chip, Button, ButtonGroup } from "@mui/material";
+import { Button, ButtonGroup } from "@mui/material";
 import { projects } from "../../../data/projects";
-import { formatMarkdownText } from "../../../utils/formatText"; // Import shared formatter
+import { formatMarkdownText } from "../../../utils/formatText";
 import useIntersectionObserver from "../../../hooks/useIntersectionObserver";
+import Eyebrow from "../../common/Eyebrow";
 
 interface ProjectImage {
 	url: string;
@@ -43,11 +43,13 @@ const Project = () => {
 	useEffect(() => {
 		const foundProject = projects.find((p) => p.projectId === projectId);
 
-		if (foundProject) {
-			setProject(foundProject);
+			if (foundProject) {
+				setProject(foundProject);
+				setCurrentImageIndex(0);
+				setImageLoading(true);
 
-			if (foundProject.type === "separated") {
-				setProjectDetails(foundProject.frontend.details);
+				if (foundProject.type === "separated") {
+					setProjectDetails(foundProject.frontend.details);
 				const frontendImages =
 					foundProject.frontend.details.images ||
 					(foundProject.frontend.details.coverImage
@@ -235,47 +237,48 @@ const Project = () => {
 			id="project"
 			ref={projectRef}>
 			<div className="container">
-				<div className="project-navigation flex items-center justify-between mb-4 sm:mb-8 px-1 sm:px-2">
+				<div className="project-navigation">
 					<button
 						onClick={goToPrevProject}
-						className="nav-button flex items-center justify-center transition-all hover:-translate-x-1 w-10 h-10 sm:w-auto sm:h-auto rounded-full sm:rounded-md group"
+						className="nav-button"
 						aria-label={`Previous Project: ${prevProjectTitle}`}
 						title={`Previous: ${prevProjectTitle}`}>
-						<i
-							className="fa-solid fa-chevron-left text-primary-600 sm:mr-2"
-							style={{ marginRight: "1px" }}></i>
-						<span className="hidden sm:inline text-primary-600">Previous</span>
-						<span className="hidden sm:absolute sm:bottom-[-20px] sm:left-0 sm:text-xs sm:opacity-0 sm:group-hover:opacity-100 sm:transition-opacity sm:duration-200 sm:whitespace-nowrap sm:max-w-[150px] sm:overflow-hidden sm:text-ellipsis">
-							{prevProjectTitle}
-						</span>
+						<i className="fa-solid fa-chevron-left" aria-hidden="true"></i>
+						<span className="hidden sm:inline ml-2">Previous</span>
 					</button>
 
 					<button
 						onClick={() => navigate("/projects")}
-						className="btn small rounded-full shadow-md hover:shadow-lg transition-all"
+						className="btn outline"
 						title="Back to all projects">
-						<i className="fa-solid fa-th sm:mr-1"></i>
-						<span className="hidden sm:inline">All Projects</span>
+						<i className="fa-solid fa-th" aria-hidden="true"></i>
+						<span className="hidden sm:inline ml-2">All Projects</span>
 					</button>
 
 					<button
 						onClick={goToNextProject}
-						className="nav-button flex items-center justify-center transition-all hover:translate-x-1 w-10 h-10 sm:w-auto sm:h-auto rounded-full sm:rounded-md group"
+						className="nav-button"
 						aria-label={`Next Project: ${nextProjectTitle}`}
 						title={`Next: ${nextProjectTitle}`}>
-						<span className="hidden sm:inline text-primary-600">Next</span>
-						<i
-							className="fa-solid fa-chevron-right text-primary-600 sm:ml-2"
-							style={{ marginLeft: "1px" }}></i>
-						<span className="hidden sm:absolute sm:bottom-[-20px] sm:right-0 sm:text-xs sm:opacity-0 sm:group-hover:opacity-100 sm:transition-opacity sm:duration-200 sm:whitespace-nowrap sm:max-w-[150px] sm:overflow-hidden sm:text-ellipsis">
-							{nextProjectTitle}
-						</span>
+						<span className="hidden sm:inline mr-2">Next</span>
+						<i className="fa-solid fa-chevron-right" aria-hidden="true"></i>
 					</button>
 				</div>
 
-				<h2 className="section-title m-0 p-0 mb-4 sm:mb-6 text-base sm:text-xl">
-					{project.title}
-				</h2>
+				<header className="project-detail-header">
+					<Eyebrow>{project.category}</Eyebrow>
+					<h1 className="project-detail-title">{project.title}</h1>
+					{project.team ? (
+						<div className="project-team-meta">
+							<span className="badge badge-coral">
+								Team of {project.team.size}
+							</span>
+							<span className="project-team-role">{project.team.role}</span>
+						</div>
+					) : (
+						<span className="badge badge-sage">Solo</span>
+					)}
+				</header>
 
 				{project.type === "separated" && (
 					<div className="flex flex-row justify-center mt-8 mb-4">
@@ -299,6 +302,20 @@ const Project = () => {
 								Frontend
 							</Button>
 						</ButtonGroup>
+					</div>
+				)}
+
+				{projectDetails.demoVideo && (
+					<div className="project-video-wrap">
+						<p className="project-video-label">Demo</p>
+						<video
+							src={projectDetails.demoVideo}
+							poster={projectDetails.previewImage}
+							controls
+							preload="metadata"
+							className="project-video">
+							Your browser does not support video.
+						</video>
 					</div>
 				)}
 
@@ -394,52 +411,38 @@ const Project = () => {
 						<div
 							className="indicators flex justify-center mt-4 mb-2"
 							style={{ minHeight: "20px" }}>
-							{images.map((_, index) => (
-								<div
-									key={index}
-									onClick={() => handleImageClick(index)}
-									className={`w-2.5 h-2.5 mx-1.5 rounded-full cursor-pointer transition-all duration-200 ${
-										currentImageIndex === index
-											? "bg-primary-500 scale-125"
-											: "bg-gray-300 hover:bg-gray-400"
-									}`}
-									role="button"
-									aria-label={`Go to image ${index + 1}`}
-									tabIndex={0}
-								/>
-							))}
+								{images.map((_, index) => (
+									<button
+										type="button"
+										key={index}
+										onClick={() => handleImageClick(index)}
+										className={`w-2.5 h-2.5 mx-1.5 rounded-full cursor-pointer transition-all duration-200 ${
+											currentImageIndex === index
+												? "bg-primary-500 scale-125"
+												: "bg-gray-300 hover:bg-gray-400"
+										}`}
+										aria-label={`Go to image ${index + 1}`}
+									/>
+								))}
 						</div>
 					)}
 				</div>
 
-				<div className="technologies flex flex-row flex-wrap items-center justify-center mb-4 sm:mb-6 gap-1">
+				<div className="project-detail-tags">
 					{projectDetails.technologies.map((tech, index) => (
-						<div className="flex flex-col items-center" key={index}>
-							<div
-								className={`skill-item place-items-center rounded-xl bg-primary-100 animate-on-load slide-up hidden sm:block`}
-								style={{
-									borderRadius: "50%",
-									margin: "10px",
-									padding: "10px",
-									opacity: skillsVisible.includes(index) ? 1 : 0,
-									transform: skillsVisible.includes(index)
-										? "translateY(0)"
-										: "translateY(20px)",
-									transition: "opacity 0.4s ease, transform 0.4s ease",
-								}}>
-								<Skill skillName={tech} size="small" />
-							</div>
-							<div className="sm:hidden items-center m-0.5">
-								<Chip
-									label={tech}
-									sx={{
-										backgroundColor: "#1f77aa",
-										color: "#ffffff",
-										margin: "2px",
-									}}
-								/>
-							</div>
-						</div>
+						<span
+							key={tech}
+							className="featured-tag project-detail-tag"
+							style={{
+								opacity: skillsVisible.includes(index) ? 1 : 0,
+								transform: skillsVisible.includes(index)
+									? "translateY(0)"
+									: "translateY(8px)",
+								transition: "opacity 0.3s ease, transform 0.3s ease",
+								transitionDelay: `${index * 40}ms`,
+							}}>
+							{tech}
+						</span>
 					))}
 				</div>
 
@@ -457,7 +460,7 @@ const Project = () => {
 
 					{projectDetails.sections.map((section, idx) => (
 						<div key={idx} className="mb-4">
-							<h3 className="font-bold mb-2 text-primary-500">
+							<h3 className="mb-2">
 								{section.title}
 							</h3>
 							<ul className="ml-4 list-disc">
@@ -490,21 +493,21 @@ const Project = () => {
 					)}
 				</div>
 
-				<div className="project-links flex flex-row justify-center align-middle text-nowrap mt-4 mx-2">
+				<div className="project-detail-actions">
 					<a
 						href={projectDetails.github}
-						className="btn small w-full sm:w-auto"
+						className="btn outline"
 						target="_blank"
 						rel="noopener noreferrer">
-						<i className="fa-brands fa-github"></i> GitHub
+						<i className="fa-brands fa-github" aria-hidden="true"></i> GitHub
 					</a>
 					{projectDetails.demo && projectId !== "portfolio" ? (
 						<a
 							href={projectDetails.demo}
-							className="btn small secondary w-full sm:w-auto"
+							className="btn"
 							target="_blank"
 							rel="noopener noreferrer">
-							<i className="fa-solid fa-globe"></i> Live Demo
+							<i className="fa-solid fa-globe" aria-hidden="true"></i> Live Demo
 						</a>
 					) : null}
 				</div>

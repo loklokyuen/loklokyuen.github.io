@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Moviever cover">
+  <rect width="800" height="520" fill="#7cb0a1"/>
+  <rect x="40" y="40" width="720" height="440" fill="none" stroke="#efe6d8" stroke-width="2" opacity="0.5"/>
+  <text x="400" y="270" text-anchor="middle" font-family="Montserrat, sans-serif" font-size="100" font-weight="700" fill="#efe6d8">Moviever</text>
+  <text x="400" y="320" text-anchor="middle" font-family="Inter, sans-serif" font-size="22" fill="#efe6d8" opacity="0.8">A Blast from the Past</text>
+</svg>

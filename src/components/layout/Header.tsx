@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "../../styles/Header.css";
 import { NavLink } from "react-router-dom";
+import LeafIcon from "../../assets/decorations/leaf.svg";
 
 interface HeaderProps {
 	darkMode: boolean;
@@ -50,10 +51,14 @@ const Header = ({ darkMode, toggleDarkMode }: HeaderProps) => {
 		<header className={`header ${darkMode ? "dark" : ""}`}>
 			<div className="flex flex-row justify-between items-center">
 				<div className="header-logo text-start">
-					<NavLink to="/">
-						<span className="text-xl font-semibold font-stretch-140%">
-							Melody Yuen
-						</span>
+					<NavLink to="/" className="header-logo-link">
+						<span className="header-logo-text">Melody Yuen</span>
+						<img
+							src={LeafIcon}
+							alt=""
+							aria-hidden="true"
+							className="header-logo-leaf"
+						/>
 					</NavLink>
 				</div>
 
@@ -78,6 +83,9 @@ const Header = ({ darkMode, toggleDarkMode }: HeaderProps) => {
 				</div>
 
 				<div className="header-buttons">
+					<NavLink to="/contact" className="header-cta">
+						Let's Connect
+					</NavLink>
 					<button
 						className="theme-toggle w-16 text-center"
 						onClick={toggleDarkMode}
