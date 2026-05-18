@@ -48,16 +48,17 @@ const ProjectModal = ({ project, open, onClose, isDarkMode }: ProjectProps) => {
 				});
 			},
 			{ threshold: 0.1 }
-		);
-		if (projectRef.current) {
-			observer.observe(projectRef.current);
-		}
-		return () => {
-			if (projectRef.current) {
-				observer.unobserve(projectRef.current);
+			);
+			const currentProjectRef = projectRef.current;
+			if (currentProjectRef) {
+				observer.observe(currentProjectRef);
 			}
-		};
-	}, [open, projectDetails]);
+			return () => {
+				if (currentProjectRef) {
+					observer.unobserve(currentProjectRef);
+				}
+			};
+		}, [open, projectDetails]);
 
 	const goToBackend = () => {
 		if (project.type === "separated") {

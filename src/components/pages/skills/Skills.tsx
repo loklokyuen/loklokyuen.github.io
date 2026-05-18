@@ -7,62 +7,73 @@ const Skills = () => {
 	const [skillsVisible, setSkillsVisible] = useState<number[]>([]);
 	const { ref: skillsRef, isVisible } = useIntersectionObserver<HTMLElement>();
 
-	const frontendCoreSkills: SkillName[] = [
-		"JavaScript",
-		"TypeScript",
-		"HTML",
-		"CSS",
+	const languages: SkillName[] = ["Python", "TypeScript", "JavaScript", "SQL"];
+	const aiSkills: SkillName[] = [
+		"LangChain",
+		"LangGraph",
+		"OpenAI API",
+		"RAG",
+		"Prompt Engineering",
 	];
-	const frontendFrameworkSkills: SkillName[] = [
+	const dataSkills: SkillName[] = [
+		"pandas",
+		"NumPy",
+		"matplotlib",
+		"pgvector",
+		"Jupyter",
+	];
+	const frontendSkills: SkillName[] = [
 		"React",
 		"React Native",
-		"React Router",
 		"Tailwind CSS",
 		"Material-UI",
 		"Vite",
 		"Expo",
+		"Streamlit",
 	];
 	const backendSkills: SkillName[] = ["Node.js", "Express.js"];
 	const databaseSkills: SkillName[] = [
 		"PostgreSQL",
+		"Firestore",
 		"Supabase",
 		"Firebase",
-		"Firestore",
 	];
-	const testingSkills: SkillName[] = ["Jest"];
-	const deploymentSkills: SkillName[] = [
-		"GitHub",
-		"Git",
+	const cloudSkills: SkillName[] = [
+		"Cloud Run",
+		"Cloud SQL",
+		"Cloud Scheduler",
 		"GitHub Actions",
 		"GitHub Pages",
 		"Netlify",
 	];
+	const testingSkills: SkillName[] = ["Jest", "pytest"];
 
-	const allSkills = [
-		...frontendCoreSkills,
-		...frontendFrameworkSkills,
-		...backendSkills,
-		...databaseSkills,
-		...testingSkills,
-		...deploymentSkills,
+	const categories: { title: string; skills: SkillName[] }[] = [
+		{ title: "Languages", skills: languages },
+		{ title: "AI", skills: aiSkills },
+		{ title: "Data", skills: dataSkills },
+		{ title: "Frontend", skills: frontendSkills },
+		{ title: "Backend", skills: backendSkills },
+		{ title: "Databases", skills: databaseSkills },
+		{ title: "Cloud & DevOps", skills: cloudSkills },
+		{ title: "Testing", skills: testingSkills },
 	];
 
-	useEffect(() => {
-		if (skillsRef.current)
-			skillsRef.current.scrollIntoView({ behavior: "smooth" });
-	}, []);
+	const allSkillsCount = categories.reduce(
+		(acc, c) => acc + c.skills.length,
+		0
+	);
 
 	useEffect(() => {
 		if (isVisible) {
 			setLoaded(true);
-			const skillCount = allSkills.length;
-			for (let i = 0; i < skillCount; i++) {
+			for (let i = 0; i < allSkillsCount; i++) {
 				setTimeout(() => {
 					setSkillsVisible((prev) => [...prev, i]);
 				}, i * 100);
 			}
 		}
-	}, [isVisible, allSkills.length]);
+	}, [isVisible, allSkillsCount]);
 
 	const renderSkillCategory = (
 		skills: SkillName[],
@@ -70,7 +81,7 @@ const Skills = () => {
 		startIndex: number
 	) => {
 		return (
-			<div className="mb-8">
+			<div className="mb-8" key={categoryTitle}>
 				<h3 className="text-xl font-semibold mb-4 text-start">
 					{categoryTitle}
 				</h3>
@@ -100,6 +111,8 @@ const Skills = () => {
 		);
 	};
 
+	let runningIndex = 0;
+
 	return (
 		<section
 			className={`skills animate-on-load slide-up ${
@@ -110,41 +123,11 @@ const Skills = () => {
 			<div className="container">
 				<h2 className="section-title">Skills</h2>
 				<div className="skills-container">
-					{renderSkillCategory(frontendCoreSkills, "Frontend Core", 0)}
-					{renderSkillCategory(
-						frontendFrameworkSkills,
-						"Frontend Frameworks & Libraries",
-						frontendCoreSkills.length
-					)}
-					{renderSkillCategory(
-						backendSkills,
-						"Backend",
-						frontendCoreSkills.length + frontendFrameworkSkills.length
-					)}
-					{renderSkillCategory(
-						databaseSkills,
-						"Databases",
-						frontendCoreSkills.length +
-							frontendFrameworkSkills.length +
-							backendSkills.length
-					)}
-					{renderSkillCategory(
-						testingSkills,
-						"Testing",
-						frontendCoreSkills.length +
-							frontendFrameworkSkills.length +
-							backendSkills.length +
-							databaseSkills.length
-					)}
-					{renderSkillCategory(
-						deploymentSkills,
-						"Version Control & Deployment",
-						frontendCoreSkills.length +
-							frontendFrameworkSkills.length +
-							backendSkills.length +
-							databaseSkills.length +
-							testingSkills.length
-					)}
+					{categories.map((cat) => {
+						const start = runningIndex;
+						runningIndex += cat.skills.length;
+						return renderSkillCategory(cat.skills, cat.title, start);
+					})}
 				</div>
 			</div>
 		</section>

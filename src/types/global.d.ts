@@ -26,7 +26,24 @@ type SkillName =
 	| "Vite"
 	| "Expo"
 	| "GitHub"
-	| "GitHub Pages";
+	| "GitHub Pages"
+	| "Python"
+	| "SQL"
+	| "LangChain"
+	| "LangGraph"
+	| "OpenAI API"
+	| "RAG"
+	| "Prompt Engineering"
+	| "pandas"
+	| "NumPy"
+	| "matplotlib"
+	| "pgvector"
+	| "Jupyter"
+	| "Streamlit"
+	| "Cloud Run"
+	| "Cloud SQL"
+	| "Cloud Scheduler"
+	| "pytest";
 
 type Project = FullStackProject | SeparatedProject;
 
@@ -43,6 +60,8 @@ interface ProjectDetails {
 	github: string;
 	demo: string | null;
 	coverImage: string;
+	previewImage?: string;
+	demoVideo?: string;
 	images?: { url: string; description: string }[];
 	demoCredentials?: {
 		note?: string;
@@ -54,10 +73,22 @@ interface ProjectDetails {
 	};
 }
 
+interface ProjectTeam {
+	size: number;
+	role: string;
+}
+
+type ProjectCategory =
+	| "AI / Data"
+	| "Web Application"
+	| "Mobile Application";
+
 interface FullStackProject {
 	title: string;
 	projectId: string;
 	type: "fullstack";
+	category: ProjectCategory;
+	team?: ProjectTeam;
 	details: ProjectDetails;
 }
 
@@ -65,6 +96,8 @@ interface SeparatedProject {
 	title: string;
 	projectId: string;
 	type: "separated";
+	category: ProjectCategory;
+	team?: ProjectTeam;
 	frontend: {
 		details: ProjectDetails;
 	};

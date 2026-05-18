@@ -1,38 +1,28 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { projects } from "../../../data/projects";
-import ProjectPreview from "./ProjectPreview";
-import useIntersectionObserver from "../../../hooks/useIntersectionObserver";
+import ProjectRow from "./ProjectRow";
 
 const Projects = () => {
-	const [loaded, setLoaded] = useState(false);
-	const { ref: projectsRef, isVisible } =
-		useIntersectionObserver<HTMLElement>();
-
 	useEffect(() => {
-		if (projectsRef.current)
-			projectsRef.current.scrollIntoView({ behavior: "smooth" });
+		window.scrollTo(0, 0);
 	}, []);
 
-	useEffect(() => {
-		if (isVisible) {
-			setLoaded(true);
-		}
-	}, [isVisible]);
-
 	return (
-		<section
-			className={`projects animate-on-load slide-up ${
-				loaded ? "loaded" : ""
-			} max-w-2xl mx-auto`}
-			id="projects"
-			ref={projectsRef}>
-			<div className="container">
-				<h2 className="section-title">Projects</h2>
-				<div className="projects-container flex flex-col mx-auto place-items-center items-center justify-center md:flex-row md:flex-wrap">
-					{projects.map((project) => (
-						<ProjectPreview key={project.title} project={project} />
-					))}
-				</div>
+		<section className="projects-page" id="projects">
+			<div className="projects-page-header">
+				<h1 className="section-title">Projects</h1>
+				<p className="projects-page-intro">
+					Selected work from full-stack web, mobile, and AI/data projects.
+				</p>
+			</div>
+			<div className="projects-rows">
+				{projects.map((project, index) => (
+					<ProjectRow
+						key={project.projectId}
+						project={project}
+						index={index}
+					/>
+				))}
 			</div>
 		</section>
 	);
